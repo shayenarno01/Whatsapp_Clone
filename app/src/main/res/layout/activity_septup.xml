@@ -37,13 +37,13 @@
         android:layout_marginRight="10dp"/>
 
     <EditText
-        android:id="@+id/provincia_setup"
+        android:id="@+id/estado_setup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/textos"
         android:layout_below="@+id/ciudad_setup"
         android:padding="10dp"
-        android:hint="Ingrese una provincia"
+        android:hint="Ingrese un estado"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
@@ -53,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/textos"
-        android:layout_below="@+id/provincia_setup"
+        android:layout_below="@+id/estado_setup"
         android:padding="10dp"
         android:hint="Ingrese su edad"
         android:layout_marginTop="15dp"

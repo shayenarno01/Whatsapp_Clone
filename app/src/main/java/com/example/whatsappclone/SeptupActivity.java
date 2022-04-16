@@ -1,4 +1,5 @@
 package com.example.whatsappclone;
+import android.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -8,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +27,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SeptupActivity extends AppCompatActivity {
 
-    private EditText nombre, ciudad, provincia, edad, genero;
+    private EditText nombre, ciudad, estado, edad, genero;
     private Button guardarinfo;
     private CircleImageView imagen_setup;
 
@@ -45,15 +45,15 @@ public class SeptupActivity extends AppCompatActivity {
 
         nombre = (EditText) findViewById(R.id.nombre_setup);
         ciudad = (EditText) findViewById(R.id.ciudad_setup);
-        provincia = (EditText) findViewById(R.id.provincia_setup);
+        estado = (EditText) findViewById(R.id.estado_setup);
         edad = (EditText) findViewById(R.id.edad_setup);
         genero = (EditText) findViewById(R.id.genero_setup);
         guardarinfo = (Button) findViewById(R.id.boton_setup);
-        imagen_setup = (CircleImageView) findViewById(R.id.imagen_setup);
+//        imagen_setup = (CircleImageView) findViewById(R.id.imagen_setup);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_setup);
-        //setSupportActionBar(toolbar); revisar
-        getSupportActionBar().setTitle("Completa tu perfil");
+//        setSupportActionBar(toolbar);
+ //       getSupportActionBar().setTitle("Completa tu perfil");
         dialog = new ProgressDialog(this);
         auth = FirebaseAuth.getInstance();
         CurrentUserID = auth.getCurrentUser().getUid();
@@ -94,7 +94,7 @@ public class SeptupActivity extends AppCompatActivity {
     private void GuardarInfoDB() {
         String nom =nombre.getText().toString();
         String ciu =ciudad.getText().toString();
-        String prov =provincia.getText().toString();
+        String est =estado.getText().toString();
         String eda =edad.getText().toString();
         String gen =genero.getText().toString();
 
@@ -102,7 +102,7 @@ public class SeptupActivity extends AppCompatActivity {
             Toast.makeText(this, "Debe ingresar su nombre", Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(ciu)){
             Toast.makeText(this, "Debe ingresar su ciudad", Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(prov)){
+        }else if (TextUtils.isEmpty(est)){
             Toast.makeText(this, "Debe ingresar su provincia", Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(eda)){
             Toast.makeText(this, "Debe ingresar su edad", Toast.LENGTH_SHORT).show();
@@ -117,11 +117,11 @@ public class SeptupActivity extends AppCompatActivity {
             HashMap map = new HashMap();
             map.put("nombre",nom);
             map.put("ciudad",ciu);
-            map.put("provincia",prov);
+            map.put("provincia",est);
             map.put("edad",eda);
             map.put("genero",gen);
 
-            UserRef.updateChildren(map).addOnCompleteListener(new OnCompleteListener() {
+            UserRef.child(CurrentUserID).updateChildren(map).addOnCompleteListener(new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if(task.isSuccessful()){
