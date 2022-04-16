@@ -3,19 +3,25 @@ package com.example.whatsappclone;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -72,9 +78,9 @@ public class SeptupActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    //@Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+  //      super.onActivityResult(requestCode, resultCode, data);
 //        if (requestCode==Gallery_PICK && requestCode==RESULT_OK && data != null){
   //          Uri imageUri = data.getData();
     //        CropImage.activity()
@@ -83,8 +89,59 @@ public class SeptupActivity extends AppCompatActivity {
 
       //  }
 //        if (re)
-    }
+    //}
 
     private void GuardarInfoDB() {
+        String nom =nombre.getText().toString();
+        String ciu =ciudad.getText().toString();
+        String prov =provincia.getText().toString();
+        String eda =edad.getText().toString();
+        String gen =genero.getText().toString();
+
+        if(TextUtils.isEmpty(nom)){
+            Toast.makeText(this, "Debe ingresar su nombre", Toast.LENGTH_SHORT).show();
+        }else if (TextUtils.isEmpty(ciu)){
+            Toast.makeText(this, "Debe ingresar su ciudad", Toast.LENGTH_SHORT).show();
+        }else if (TextUtils.isEmpty(prov)){
+            Toast.makeText(this, "Debe ingresar su provincia", Toast.LENGTH_SHORT).show();
+        }else if (TextUtils.isEmpty(eda)){
+            Toast.makeText(this, "Debe ingresar su edad", Toast.LENGTH_SHORT).show();
+        }else if (TextUtils.isEmpty(gen)){
+            Toast.makeText(this, "Debe ingresar su genero", Toast.LENGTH_SHORT).show();
+        }else{
+            dialog.setTitle("Guardando sus datos");
+            dialog.setMessage("Por favor espere a que finalice el proceso");
+            dialog.show();
+            dialog.setCanceledOnTouchOutside(false);
+
+            HashMap map = new HashMap();
+            map.put("nombre",nom);
+            map.put("ciudad",ciu);
+            map.put("provincia",prov);
+            map.put("edad",eda);
+            map.put("genero",gen);
+
+            UserRef.updateChildren(map).addOnCompleteListener(new OnCompleteListener() {
+                @Override
+                public void onComplete(@NonNull Task task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(SeptupActivity.this, "Datos guardados", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        EnviarAlInicio();
+                    }else{
+                        String err = task.getException().getMessage();
+                        Toast.makeText(SeptupActivity.this, "Error"+err, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
+    private void EnviarAlInicio() {
+
+        Intent intent = new Intent(SeptupActivity.this, InicioActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }
