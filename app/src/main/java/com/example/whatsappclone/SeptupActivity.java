@@ -67,7 +67,7 @@ public class SeptupActivity extends AppCompatActivity {
             }
         });
 
-        imagen_setup.setOnClickListener(new View.OnClickListener() {
+        /*imagen_setup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
@@ -75,7 +75,7 @@ public class SeptupActivity extends AppCompatActivity {
                 intent.setType("image/*");
                 startActivityForResult(intent,Gallery_PICK);
             }
-        });
+        });*/
     }
 
     //@Override
