@@ -1,6 +1,4 @@
 package com.example.whatsappclone;
-import android.widget.Toolbar;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +18,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
@@ -49,47 +48,22 @@ public class SeptupActivity extends AppCompatActivity {
         edad = (EditText) findViewById(R.id.edad_setup);
         genero = (EditText) findViewById(R.id.genero_setup);
         guardarinfo = (Button) findViewById(R.id.boton_setup);
-//        imagen_setup = (CircleImageView) findViewById(R.id.imagen_setup);
-
         toolbar = (Toolbar) findViewById(R.id.toolbar_setup);
-//        setSupportActionBar(toolbar);
- //       getSupportActionBar().setTitle("Completa tu perfil");
+        imagen_setup = (CircleImageView) findViewById(R.id.imagen_setup);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Completa tu perfil");
         dialog = new ProgressDialog(this);
         auth = FirebaseAuth.getInstance();
         CurrentUserID = auth.getCurrentUser().getUid();
         UserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
-        UserProfileImagen = FirebaseStorage.getInstance().getReference().child("imagesPerfil");
+        //UserProfileImagen = FirebaseStorage.getInstance().getReference().child("imagesPerfil");
 
         guardarinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 GuardarInfoDB();
-            }
-        });
-
-        /*imagen_setup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent,Gallery_PICK);
-            }
-        });*/
+            }});
     }
-
-    //@Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-  //      super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode==Gallery_PICK && requestCode==RESULT_OK && data != null){
-  //          Uri imageUri = data.getData();
-    //        CropImage.activity()
-              //      .setGuidelines(CropImageView.Guidelines.ON)
-                //    .start(this);
-
-      //  }
-//        if (re)
-    //}
 
     private void GuardarInfoDB() {
         String nom =nombre.getText().toString();
@@ -117,7 +91,7 @@ public class SeptupActivity extends AppCompatActivity {
             HashMap map = new HashMap();
             map.put("nombre",nom);
             map.put("ciudad",ciu);
-            map.put("provincia",est);
+            map.put("estado",est);
             map.put("edad",eda);
             map.put("genero",gen);
 
@@ -130,10 +104,7 @@ public class SeptupActivity extends AppCompatActivity {
                         EnviarAlInicio();
                     }else{
                         String err = task.getException().getMessage();
-                        Toast.makeText(SeptupActivity.this, "Error"+err, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+                        Toast.makeText(SeptupActivity.this, "Error"+err, Toast.LENGTH_SHORT).show(); } }});
         }
     }
 

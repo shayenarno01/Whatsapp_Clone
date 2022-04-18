@@ -9,9 +9,7 @@
 
     <include
         android:id="@+id/toolbar_setup"
-        layout="@layout/toolbar_principal">
-    </include>
-
+        layout="@layout/toolbar_principal"/>
     <EditText
         android:id="@+id/nombre_setup"
         android:layout_width="match_parent"
@@ -79,7 +77,7 @@
         android:layout_below="@id/genero_setup"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/img1"
+        android:src="@drawable/no_profile"
         app:civ_border_color="@color/black"
         app:civ_border_width="2dp"/>
 
