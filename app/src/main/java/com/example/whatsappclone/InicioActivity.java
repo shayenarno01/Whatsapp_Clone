@@ -93,25 +93,26 @@ public class InicioActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
+
         getMenuInflater().inflate(R.menu.menus_opciones, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
 
-        if (item.getItemId() == R.id.buscar_contactos_menu){
+        if (item.getItemId() == R.id.buscar){
             Toast.makeText(this, "Buscar amigos", Toast.LENGTH_SHORT).show();
         }
-        if (item.getItemId() == R.id.miperfil_menu){
+        if (item.getItemId() == R.id.miperfil){
             Toast.makeText(this, "Mi perfil", Toast.LENGTH_SHORT).show();
         }
-        if (item.getItemId() == R.id.cerrar_Sesion_menu){
+        if (item.getItemId() == R.id.cerrar){
             mAuth.signOut();
             EnviarALogin();
         }
+
         return true;
     }
 }

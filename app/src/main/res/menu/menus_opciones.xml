@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/buscar"
+        android:title="@string/item1"
 
-        android:title="Buscar contactos"
-        android:id="@+id/buscar_contactos_menu"
-        app:showAsAction="never"
         >
     </item>
 
     <item
-        android:title="Mi perfil"
-        android:tooltipText="Mi perfil"
-        android:id="@+id/miperfil_menu"
-        app:showAsAction="never">
+        android:id="@+id/miperfil"
+        android:title="@string/item2"
+        >
     </item>
 
     <item
-        android:title="Cerrar sesion"
-        android:id="@+id/cerrar_Sesion_menu"
-        app:showAsAction="never">
+        android:id="@+id/cerrar"
+        android:title="@string/item3"
+        >
     </item>
 </menu>

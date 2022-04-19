@@ -56,7 +56,6 @@ public class SeptupActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         CurrentUserID = auth.getCurrentUser().getUid();
         UserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
-        //UserProfileImagen = FirebaseStorage.getInstance().getReference().child("imagesPerfil");
 
         guardarinfo.setOnClickListener(new View.OnClickListener() {
             @Override
