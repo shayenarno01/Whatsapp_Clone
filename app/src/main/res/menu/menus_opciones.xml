@@ -3,21 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/buscar"
-        android:title="@string/item1"
-
-        >
-    </item>
-
-    <item
         android:id="@+id/miperfil"
         android:title="@string/item2"
-        >
-    </item>
-
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/creargrupo"
+        android:title="@string/item3"
+        app:showAsAction="never" />
     <item
         android:id="@+id/cerrar"
-        android:title="@string/item3"
-        >
-    </item>
+        android:title="@string/item4" />
+
 </menu>

@@ -14,42 +14,21 @@ public class AcesoTabsAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                ChatFragment chatFragment = new ChatFragment();
-                return chatFragment;
-            case 1:
                 GruposFragment gruposFragment = new GruposFragment();
                 return gruposFragment;
-            case 2:
-                ContactosFragment contactosFragment = new ContactosFragment();
-                return contactosFragment;
 
-            default:
-                return null;
-            }
         }
 
     @Override
     public int getCount() {
-        return 3;
+        return 1;
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
 
-        switch (position) {
-            case 0:
-                return "Chats";
-            case 1:
                 return "Grupos";
-            case 2:
-                return "Contactos";
-
-            default:
-                return null;
-        }
 
     }
 }
